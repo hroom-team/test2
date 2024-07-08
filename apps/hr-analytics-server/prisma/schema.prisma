@@ -1,0 +1,61 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model AnalyticsData {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  aggregateResults      Json?
+  trendsAnalysis        Json?
+  correlations          Json?
+  userActivityData      Json?
+  benchmarkingData      Json?
+  performanceReviewData Json?
+  systemPerformanceData Json?
+}
+
+model UserData {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  userId             String?
+  email              String?
+  telegramId         String?
+  role               String?
+  department         String?
+  location           String?
+  company            String?
+  languagePreference String?
+  personalProfile    Json?
+}
+
+model SurveyData {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  surveyId          String?
+  surveyTitle       String?
+  surveyDescription String?
+  targetAudience    Json?
+  surveyPeriod      DateTime?
+  questions         Json?
+  answers           Json?
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstName String?
+  lastName  String?
+  username  String   @unique
+  email     String?  @unique
+  password  String
+  roles     Json
+}
