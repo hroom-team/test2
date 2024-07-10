@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model AnalyticsData {
+  id                    String   @id @default(cuid())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  aggregateResults      Json?
+  trendsAnalysis        Json?
+  correlations          Json?
+  userActivityData      Json?
+  benchmarkingData      Json?
+  performanceReviewData Json?
+  systemPerformanceData Json?
+}
