@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SurveyData {
+  id                String    @id @default(cuid())
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  surveyId          String?
+  surveyTitle       String?
+  surveyDescription String?
+  targetAudience    Json?
+  surveyPeriod      DateTime?
+  questions         Json?
+  answers           Json?
+}
